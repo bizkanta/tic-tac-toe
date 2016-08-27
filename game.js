@@ -1,23 +1,22 @@
 'use strict';
 
 angular.module('ticTacToe', [])
-  .controller('GameCtrl', ['$scope', function($scope) {
+  .controller('GameCtrl', ['$scope', 'GameService', function($scope, gameService) {
     var player1 = 'x';
     var player2 = 'o';
 
     initGame();
 
-    $scope.newGame = function() {
-      initGame();
+    function initGame() {
+      $scope.board = gameService.loadGame();
+      $scope.currentPlayer = player1;
+      $scope.gameOver = false;
+      $scope.tie = null;
+      $scope.winner = null;
     }
 
-    function initGame() {
-      $scope.board = [
-        [null, null, null],
-        [null, null, null],
-        [null, null, null]
-      ];
-      $scope.currentPlayer = $scope.currentPlayer ? $scope.currentPlayer : player1;
+    $scope.newGame = function() {
+      $scope.board = gameService.getEmptyBoard();
       $scope.gameOver = false;
       $scope.tie = null;
       $scope.winner = null;
@@ -32,6 +31,7 @@ angular.module('ticTacToe', [])
     function markCell(rowIdx, colIdx) {
       if ($scope.board[rowIdx][colIdx] === null) {
         $scope.board[rowIdx][colIdx] = $scope.currentPlayer;
+        gameService.saveGame($scope.board);
         checkWinner();
       }
     }
@@ -81,6 +81,4 @@ angular.module('ticTacToe', [])
         return cell !== null;
       });
     }
-
-
   }]);
