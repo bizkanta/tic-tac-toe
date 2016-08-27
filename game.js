@@ -21,8 +21,7 @@ angular.module('ticTacToe', [])
     function markCell(rowIdx, colIdx) {
       if ($scope.board[rowIdx][colIdx] === null) {
         $scope.board[rowIdx][colIdx] = $scope.currentPlayer;
-        getWinner();
-        switchPlayer();
+        checkWinner();
       }
     }
 
@@ -30,24 +29,30 @@ angular.module('ticTacToe', [])
       $scope.currentPlayer = $scope.currentPlayer === player1 ? player2 : player1;
     }
 
-    function getWinner() {
-      if (hasWinner()) {
-        $scope.winner = $scope.currentPlayer;
-        $scope.gameOver = true;
-      }
-    }
-
-    function hasWinner() {
-      var p = $scope.currentPlayer;
+    function checkWinner() {
       var board = $scope.board.reduce(function(prev, next){
         return prev.concat(next);
       }, []);
-      for (var i = 0; i < board.length; i+=3) {
+      if (hasWinner(board)) {
+        $scope.winner = $scope.currentPlayer;
+        $scope.gameOver = true;
+      } else if (isAllMarked(board)) {
+        $scope.tie = true;
+        $scope.gameOver = true;
+      } else {
+        switchPlayer();
+      }
+    }
+
+    function hasWinner(board) {
+      var COLUMNS = 3;
+      var p = $scope.currentPlayer;
+      for (var i = 0; i < board.length; i+=COLUMNS) {
         if (board[i] === p && board[i+1] === p && board[i+2] === p) {
           return true;
         }
       }
-      for (var i = 0; i < board.length; i++) {
+      for (var i = 0; i < COLUMNS; i++) {
         if (board[i] === p && board[i+3] === p && board[i+6] === p) {
           return true;
         }
@@ -58,5 +63,11 @@ angular.module('ticTacToe', [])
         return true;
       }
       return false;
+    }
+
+    function isAllMarked(board) {
+      return board.every(function(cell) {
+        return cell !== null;
+      });
     }
   }]);
