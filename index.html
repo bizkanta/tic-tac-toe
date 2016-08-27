@@ -9,10 +9,20 @@
   <title>tic-tac-toe</title>
 </head>
 <body ng-app="ticTacToe">
-  <table ng-controller="GameCtrl">
-    <tr ng-repeat="row in board track by $index">
-      <td ng-repeat="column in row track by $index">{{column}}</td>
-    </tr>
-  </table>
+  <div class="wrapper" ng-controller="GameCtrl">
+    <div ng-switch="gameOver" class="notification">
+      <span ng-switch-when="true">The winner is: {{winner}}!</span>
+      <span ng-switch-default>Next player: {{currentPlayer}}</span>
+    </div>
+    <table>
+      <tr ng-repeat="row in board track by $index" ng-init="rowIndex=$index">
+        <td ng-repeat="column in row track by $index"
+          ng-init="columnIndex=$index"
+          ng-click="onSelectCell(rowIndex, columnIndex)">
+          {{column}}
+        </td>
+      </tr>
+    </table>
+  </div>
 </body>
 </html>

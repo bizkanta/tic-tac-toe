@@ -2,11 +2,21 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+.wrapper {
+  margin: 50px auto;
+  max-width: 300px;
+}
+
+.notification {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 28px;
+}
+
 table {
   text-align: center;
   font-size: 50px;
   border-collapse: collapse;
-  margin: 50px auto;
 }
 
 tr {
@@ -20,6 +30,7 @@ tr:last-child {
 
 td {
   width: 100px;
+  cursor: pointer;
 }
 
 td:nth-child(2) {
