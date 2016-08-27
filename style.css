@@ -31,9 +31,14 @@ tr:last-child {
 td {
   width: 100px;
   cursor: pointer;
+  transition: color 1s ease;
 }
 
 td:nth-child(2) {
   border-left: 3px solid black;
   border-right: 3px solid black;
+}
+
+.winner {
+  color: red;
 }

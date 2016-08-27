@@ -17,10 +17,11 @@
     </div>
     <table>
       <tr ng-repeat="row in board track by $index" ng-init="rowIndex=$index">
-        <td ng-repeat="column in row track by $index"
+        <td ng-repeat="cell in row track by $index"
           ng-init="columnIndex=$index"
-          ng-click="onSelectCell(rowIndex, columnIndex)">
-          {{column}}
+          ng-click="onSelectCell(rowIndex, columnIndex)"
+          ng-class="{'winner': winner === cell}">
+          {{cell}}
         </td>
       </tr>
     </table>
