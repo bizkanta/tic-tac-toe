@@ -5,6 +5,7 @@ body {
 .wrapper {
   margin: 50px auto;
   max-width: 300px;
+  text-align: center;
 }
 
 .notification {
@@ -40,5 +41,19 @@ td:nth-child(2) {
 }
 
 .winner {
+  color: red;
+}
+
+footer {
+  padding: 20px;
+}
+
+.linkButton {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+}
+
+.linkButton:hover {
   color: red;
 }

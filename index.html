@@ -20,11 +20,14 @@
         <td ng-repeat="cell in row track by $index"
           ng-init="columnIndex=$index"
           ng-click="onSelectCell(rowIndex, columnIndex)"
-          ng-class="{'winner': winner === cell}">
+          ng-class="{'winner': winner && winner === cell}">
           {{cell}}
         </td>
       </tr>
     </table>
+    <footer>
+      <a ng-click="newGame()" href="" class="linkButton">New game</a>
+    </footer>
   </div>
 </body>
 </html>

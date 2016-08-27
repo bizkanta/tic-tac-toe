@@ -4,13 +4,24 @@ angular.module('ticTacToe', [])
   .controller('GameCtrl', ['$scope', function($scope) {
     var player1 = 'x';
     var player2 = 'o';
-    $scope.currentPlayer = player1;
-    $scope.gameOver = false;
-    $scope.board = [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null]
-    ];
+
+    initGame();
+
+    $scope.newGame = function() {
+      initGame();
+    }
+
+    function initGame() {
+      $scope.board = [
+        [null, null, null],
+        [null, null, null],
+        [null, null, null]
+      ];
+      $scope.currentPlayer = $scope.currentPlayer ? $scope.currentPlayer : player1;
+      $scope.gameOver = false;
+      $scope.tie = null;
+      $scope.winner = null;
+    }
 
     $scope.onSelectCell = function(rowIdx, colIdx) {
       if (!$scope.gameOver) {
@@ -70,4 +81,6 @@ angular.module('ticTacToe', [])
         return cell !== null;
       });
     }
+
+
   }]);
