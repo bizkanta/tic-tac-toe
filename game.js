@@ -8,11 +8,15 @@ angular.module('ticTacToe', [])
     initGame();
 
     function initGame() {
-      $scope.board = gameService.loadGame();
-      $scope.currentPlayer = player1;
-      $scope.gameOver = false;
-      $scope.tie = null;
-      $scope.winner = null;
+      var savedGame = gameService.loadGame();
+      if (savedGame) {
+        $scope.board = savedGame.board;
+        $scope.currentPlayer = savedGame.player;
+        checkWinner();
+      } else {
+        $scope.board = gameService.getEmptyBoard();
+        $scope.currentPlayer = player1;
+      }
     }
 
     $scope.newGame = function() {
@@ -31,7 +35,7 @@ angular.module('ticTacToe', [])
     function markCell(rowIdx, colIdx) {
       if ($scope.board[rowIdx][colIdx] === null) {
         $scope.board[rowIdx][colIdx] = $scope.currentPlayer;
-        gameService.saveGame($scope.board);
+        gameService.saveGame($scope.board, $scope.currentPlayer);
         checkWinner();
       }
     }

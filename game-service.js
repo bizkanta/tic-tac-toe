@@ -11,12 +11,15 @@ angular.module('ticTacToe')
       ];
     };
 
-    this.saveGame = function(board) {
-      localStorage.setItem('ticTacGame', JSON.stringify(board));
+    this.saveGame = function(board, currentPlayer) {
+      var gameState = {
+        player: currentPlayer,
+        board: board
+      };
+      localStorage.setItem('ticTacGame', JSON.stringify(gameState));
     };
 
     this.loadGame = function() {
-      var saved = JSON.parse(localStorage.getItem('ticTacGame'));
-      return saved || this.getEmptyBoard();
+      return JSON.parse(localStorage.getItem('ticTacGame'));
     };
   }]);
