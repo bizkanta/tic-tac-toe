@@ -21,6 +21,7 @@ angular.module('ticTacToe', [])
 
     $scope.newGame = function() {
       $scope.board = gameService.getEmptyBoard();
+      gameService.clearGame();
       $scope.gameOver = false;
       $scope.tie = null;
       $scope.winner = null;
@@ -68,7 +69,7 @@ angular.module('ticTacToe', [])
         }
       }
       for (var i = 0; i < COLUMNS; i++) {
-        if (board[i] === p && board[i+3] === p && board[i+6] === p) {
+        if (board[i] === p && board[i+COLUMNS] === p && board[i+2*COLUMNS] === p) {
           return true;
         }
       }

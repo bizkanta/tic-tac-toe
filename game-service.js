@@ -22,4 +22,8 @@ angular.module('ticTacToe')
     this.loadGame = function() {
       return JSON.parse(localStorage.getItem('ticTacGame'));
     };
+
+    this.clearGame = function() {
+      return localStorage.clear();
+    };
   }]);
